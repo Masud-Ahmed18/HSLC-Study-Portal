@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSEB / SEBA Class 10 HSLC Exam Portal</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #dd6b20;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Top Navbar */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-container input {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            width: 220px;
+        }
+
+        .lang-toggle {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        aside {
+            width: 280px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        aside h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+        }
+
+        aside ul {
+            list-style: none;
+        }
+
+        aside ul li {
+            margin-bottom: 10px;
+        }
+
+        aside ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 8px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        aside ul li a:hover, aside ul li a.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Grid Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 18px;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        /* Question Box Style */
+        .question-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .question-box h5 {
+            margin-bottom: 8px;
+        }
+
+        .options-list {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">
+            <h1>ASSEB HSLC Board Exam Hub (Class 10)</h1>
+        </div>
+        <div class="nav-right">
+            <div class="search-container">
+                <input type="text" id="searchInput" onkeyup="searchContent()" placeholder="Search chapters, topics...">
+            </div>
+            <button class="lang-toggle" onclick="toggleLanguage()">Medium: <span id="langLabel">English</span></button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside>
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#" class="nav-btn active" onclick="showSection('chapterwise')">Chapter-wise Questions</a></li>
+                <li><a href="#" class="nav-btn" onclick="showSection('district-papers')">Half Yearly (Districts)</a></li>
+                <li><a href="#" class="nav-btn" onclick="showSection('hslc-papers')">HSLC Board Papers (2020+)</a></li>
+                <li><a href="#" class="nav-btn" onclick="showSection('mock-tests')">Mock Test Series (50/100 M)</a></li>
+                <li><a href="#" class="nav-btn" onclick="showSection('daily-quiz')">Daily Quiz & Formulas</a></li>
+                <li><a href="#" class="nav-btn" onclick="showSection('extra-sheets')">Extra Answer Sheet / OMR</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main id="mainContent">
+
+            <!-- Section 1: Chapter-wise Questions -->
+            <section id="chapterwise">
+                <h2 class="section-title"><span class="lang-en">Chapter-wise Important Questions</span><span class="lang-as hidden">অধ্যায়ভিত্তিক গুৰুত্বপূৰ্ণ প্ৰশ্নোত্তৰ</span></h2>
+                
+                <div class="grid">
+                    <!-- General Science -->
+                    <div class="card">
+                        <span class="badge">Science</span>
+                        <h4><span class="lang-en">Chemical Reactions & Equations</span><span class="lang-as hidden">ৰাসায়নিক বিক্ৰিয়া আৰু সমীকৰণ</span></h4>
+                        <p><span class="lang-en">MCQs, Short (2M/3M) and Long (5M) Questions.</span><span class="lang-as hidden">এম.চি.কিউ, চুটি আৰু দীঘল প্ৰশ্নসমূহ।</span></p>
+                        <button class="btn" onclick="openQuestions('sci-ch1')">View Questions</button>
+                    </div>
+
+                    <!-- General Mathematics -->
+                    <div class="card">
+                        <span class="badge">Maths</span>
+                        <h4><span class="lang-en">Real Numbers & Quadratic Equations</span><span class="lang-as hidden">বাস্তৱ সংখ্যা আৰু দ্বিঘাত সমীকৰণ</span></h4>
+                        <p><span class="lang-en">Proofs, formula applications, and MCQs.</span><span class="lang-as hidden">প্ৰমাণ, সূত্ৰৰ প্ৰয়োগ আৰু এম.চি.কিউ.</span></p>
+                        <button class="btn" onclick="openQuestions('math-ch1')">View Questions</button>
+                    </div>
+
+                    <!-- Social Science -->
+                    <div class="card">
+                        <span class="badge">Social Science</span>
+                        <h4><span class="lang-en">Swadeshi Movement & Peasant Revolts in Assam</span><span class="lang-as hidden">স্বদেশী আন্দোলন আৰু অসমৰ কৃষক বিদ্ৰোহ</span></h4>
+                        <p><span class="lang-en">Historical dates, short & long analytical questions.</span><span class="lang-as hidden">ঐতিহাসিক তাৰিখ, চুটি আৰু দীঘল প্ৰশ্ন।</span></p>
+                        <button class="btn" onclick="openQuestions('sst-ch1')">View Questions</button>
+                    </div>
+
+                    <!-- Garment Design (Elective) -->
+                    <div class="card">
+                        <span class="badge">Elective</span>
+                        <h4><span class="lang-en">Garment Design & Textile Care</span><span class="lang-as hidden">গাৰ্মেন্ট ডিজাইন আৰু বস্ত্ৰ পৰিচৰ্যা</span></h4>
+                        <p><span class="lang-en">Stitching techniques, fabric selection & MCQs.</span><span class="lang-as hidden">চিলাই কৌশল, কাপোৰ নিৰ্বাচন আৰু প্ৰশ্নোত্তৰ।</span></p>
+                        <button class="btn" onclick="openQuestions('ele-garment')">View Questions</button>
+                    </div>
+                </div>
+
+                <!-- Dynamic Question Display Box -->
+                <div id="questionContainer" class="hidden" style="margin-top: 30px;">
+                    <button class="btn btn-outline" onclick="closeQuestions()">← Back to Chapters</button>
+                    <div id="activeQuestions" style="margin-top: 15px;"></div>
+                </div>
+            </section>
+
+            <!-- Section 2: District Papers (Kamrup Metro & Rural, etc.) -->
+            <section id="district-papers" class="hidden">
+                <h2 class="section-title"><span class="lang-en">Half-Yearly & Pre-Test District Papers (2020-2026)</span><span class="lang-as hidden">সাময়িক আৰু প্ৰাক-বাছনি পৰীক্ষাৰ জিলাভিত্তিক প্ৰশ্নকাকত</span></h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge">Kamrup (Metro & Rural)</span>
+                        <h4>Half-Yearly Examination Question Bank</h4>
+                        <p>Includes General Science, Maths, English & Garment Design (2020-2025).</p>
+                        <a href="#" class="btn">Download PDFs</a>
+                    </div>
+                    <div class="card">
+                        <span class="badge">Upper Assam Districts</span>
+                        <h4>Jorhat, Dibrugarh, Sivasagar Pre-Test Papers</h4>
+                        <p>All core and elective subjects solved question paper archive.</p>
+                        <a href="#" class="btn">Download PDFs</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: HSLC Papers -->
+            <section id="hslc-papers" class="hidden">
+                <h2 class="section-title"><span class="lang-en">HSLC Board Official Solved Papers (2020 - 2026)</span><span class="lang-as hidden">এইচ.এছ.এল.চি. মূল পৰীক্ষাৰ সমাধানকৃত প্ৰশ্নকাকত</span></h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge">HSLC 2025/2026</span>
+                        <h4>General Science & General Mathematics</h4>
+                        <p>Fully solved according to the SEBA 45 MCQ + 45 Theory Blueprint.</p>
+                        <a href="#" class="btn">View Solved Paper</a>
+                    </div>
+                    <div class="card">
+                        <span class="badge">HSLC Archive</span>
+                        <h4>Assamese (MIL) & English (2020 - 2024)</h4>
+                        <p>Grammar solutions, essay frameworks, and comprehension passages.</p>
+                        <a href="#" class="btn">View Solved Paper</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Mock Test Papers -->
+            <section id="mock-tests" class="hidden">
+                <h2 class="section-title"><span class="lang-en">Board Preparation Mock Tests (50 & 100 Marks)</span><span class="lang-as hidden">মক টেষ্ট শৃংখলা (৫০ আৰু ১০০ নম্বৰৰ)</span></h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge">50 Marks Test</span>
+                        <h4>Half-Length Practice Test (Maths & Science)</h4>
+                        <p>Time Limit: 1.5 Hours. Contains 25 MCQs and 25 Marks Theory.</p>
+                        <button class="btn">Start Online Test</button>
+                    </div>
+                    <div class="card">
+                        <span class="badge">100 Marks Test</span>
+                        <h4>Full Board Blueprint Test (All Subjects)</h4>
+                        <p>Time Limit: 3 Hours. Complete HSLC standard model question paper.</p>
+                        <button class="btn">Download PDF & Keys</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Daily Quiz & Formula Sheet -->
+            <section id="daily-quiz" class="hidden">
+                <h2 class="section-title"><span class="lang-en">Daily Quiz & Essential Formula Sheets</span><span class="lang-as hidden">দৈনিক কুইজ আৰু প্ৰয়োজনীয় সূত্ৰাৱলী</span></h2>
+                <div class="card" style="margin-bottom: 20px;">
+                    <h4>Daily Quiz: Science & Maths MCQs</h4>
+                    <p>Q1. Which of the following is a balanced chemical equation?</p>
+                    <div style="margin: 10px 0;">
+                        <input type="radio" id="q1a" name="quiz1"> <label for="q1a">Fe + H₂O → Fe₃O₄ + H₂</label><br>
+                        <input type="radio" id="q1b" name="quiz1"> <label for="q1b">3Fe + 4H₂O → Fe₃O₄ + 4H₂</label><br>
+                    </div>
+                    <button class="btn" onclick="alert('Correct! Option B is balanced.')">Submit Answer</button>
+                </div>
+
+                <div class="card">
+                    <h4>Maths & Physics Quick Formula Sheet</h4>
+                    <ul>
+                        <li><strong>Quadratic Formula:</strong> x = [-b ± √(b² - 4ac)] / 2a</li>
+                        <li><strong>Ohm's Law:</strong> V = I × R</li>
+                        <li><strong>Lens Formula:</strong> (1/f) = (1/v) - (1/u)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6: Extra Answer Sheets -->
+            <section id="extra-sheets" class="hidden">
+                <h2 class="section-title"><span class="lang-en">Board Practice Answer Booklet & OMR Sheet</span><span class="lang-as hidden">পৰীক্ষাৰ উত্তৰ বহী আৰু ও.এম.আৰ শ্বীট</span></h2>
+                <p>Download and print standard SEBA-pattern answer sheets and 45-mark OMR sheets to practice time management at home.</p>
+                <br>
+                <a href="#" class="btn" onclick="alert('Downloading SEBA Pattern 16-Page Answer Sheet PDF...')">Download Extra Answer Sheet PDF</a>
+                <a href="#" class="btn btn-outline" onclick="alert('Downloading 45-Mark OMR Template...')">Download OMR Sheet PDF</a>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Language Toggle Mechanism
+        let currentLang = 'en';
+        function toggleLanguage() {
+            const enElems = document.querySelectorAll('.lang-en');
+            const asElems = document.querySelectorAll('.lang-as');
+            const label = document.getElementById('langLabel');
+
+            if (currentLang === 'en') {
+                enElems.forEach(el => el.classList.add('hidden'));
+                asElems.forEach(el => el.classList.remove('hidden'));
+                label.innerText = 'অসমীয়া';
+                currentLang = 'as';
+            } else {
+                asElems.forEach(el => el.classList.add('hidden'));
+                enElems.forEach(el => el.classList.remove('hidden'));
+                label.innerText = 'English';
+                currentLang = 'en';
+            }
+        }
+
+        // Section Switcher
+        function showSection(sectionId) {
+            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Search Bar Functionality
+        function searchContent() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Mock Database for Chapter Questions
+        const questionsData = {
+            'sci-ch1': `
+                <h3>Chemical Reactions & Equations (ৰাসায়নিক বিক্ৰিয়া আৰু সমীকৰণ)</h3><br>
+                <div class="question-box">
+                    <h5>[1 Mark MCQ] What happens when dilute hydrochloric acid is added to iron fillings?</h5>
+                    <div class="options-list">
+                        a) Hydrogen gas and iron chloride are produced.<br>
+                        b) Chlorine gas and iron hydroxide are produced.
+                    </div>
+                    <strong>Answer:</strong> a) Hydrogen gas and iron chloride are produced.
+                </div>
+                <div class="question-box">
+                    <h5>[2 Marks Short] Why should a magnesium ribbon be cleaned before burning in air?</h5>
+                    <p><strong>Answer:</strong> To remove the protective layer of basic magnesium carbonate from its surface so that it can react smoothly with oxygen.</p>
+                </div>
+                <div class="question-box">
+                    <h5>[5 Marks Long] Explain Displacement and Double Displacement reactions with balanced chemical equations.</h5>
+                </div>
+            `,
+            'ele-garment': `
+                <h3>Garment Design (গাৰ্মেন্ট ডিজাইন)</h3><br>
+                <div class="question-box">
+                    <h5>[1 Mark MCQ] Which seam is most suitable for sheer fabrics?</h5>
+                    <p><strong>Answer:</strong> French Seam.</p>
+                </div>
+                <div class="question-box">
+                    <h5>[3 Marks Short] Explain three essential steps in taking accurate body measurements for stitching.</h5>
+                </div>
+            `
+        };
+
+        function openQuestions(key) {
+            const container = document.getElementById('questionContainer');
+            const activeQuestions = document.getElementById('activeQuestions');
+            
+            if (questionsData[key]) {
+                activeQuestions.innerHTML = questionsData[key];
+            } else {
+                activeQuestions.innerHTML = "<p>Questions for this chapter are updated regularly in the database.</p>";
+            }
+            container.classList.remove('hidden');
+        }
+
+        function closeQuestions() {
+            document.getElementById('questionContainer').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
