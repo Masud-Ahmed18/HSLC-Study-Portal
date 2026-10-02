@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HSLC AI Study Coach | ASSEB Class 10</title>
+<meta name="description" content="AI-powered Class 10 ASSEB HSLC study coach with notes, important questions, quizzes, tests and progress tracking.">
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--primary:#4f46e5;--primary2:#7c3aed;--line:#e7eaf1;--good:#087443;--warn:#b45309;--shadow:0 10px 30px rgba(16,24,40,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:#111827;color:#fff;padding:20px;position:fixed;inset:0 auto 0 0;overflow:auto}
+.brand{font-size:20px;font-weight:800;display:flex;gap:10px;align-items:center;margin-bottom:25px}.brand span{background:#4f46e5;padding:8px;border-radius:12px}
+.nav button{display:block;width:100%;text-align:left;background:transparent;color:#cbd5e1;padding:12px;border-radius:10px;margin:4px 0}.nav button.active,.nav button:hover{background:#20283a;color:#fff}
+.main{margin-left:260px;width:calc(100% - 260px);padding:22px 28px}.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:22px}.search{flex:1;max-width:650px;background:white;border:1px solid var(--line);padding:12px 15px;border-radius:12px}
+.lang{padding:10px 12px;border:1px solid var(--line);background:#fff;border-radius:10px}.hero{background:linear-gradient(120deg,#312e81,#6d28d9);color:#fff;border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.hero h1{margin:0 0 8px;font-size:30px}.hero p{margin:0;color:#ddd6fe}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:7px 10px;border-radius:999px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:18px 0}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat b{font-size:25px}.muted{color:var(--muted);font-size:14px}.section{margin-top:25px}.section h2{font-size:20px}
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.subject{min-height:155px;position:relative;overflow:hidden}.subject .icon{font-size:30px}.subject h3{margin:12px 0 5px}.subject p{margin:0;color:var(--muted);font-size:14px}.open{margin-top:15px;background:#eef2ff;color:#3730a3;padding:9px 12px;border-radius:9px}
+.view{display:none}.view.active{display:block}.row{display:flex;gap:10px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:10px;background:#eef2ff;color:#3730a3;font-weight:650}.btn.primary{background:var(--primary);color:white}.btn.dark{background:#111827;color:white}.btn.good{background:#ecfdf3;color:var(--good)}
+.chapter-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.chapter{padding:15px;background:#fff;border:1px solid var(--line);border-radius:13px}.chapter b{display:block;margin-bottom:6px}.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;background:#f3f4f6;margin:3px}.high{background:#fff7ed;color:#9a3412}.verified{background:#ecfdf3;color:#166534}
+.tabs{display:flex;gap:7px;overflow:auto;margin:15px 0}.tabs button{white-space:nowrap;background:white;border:1px solid var(--line);padding:9px 12px;border-radius:9px}.tabs button.active{background:#111827;color:#fff}
+.note{border-left:4px solid var(--primary);background:#f8f7ff;padding:15px;border-radius:10px;margin:12px 0}.question{padding:15px;border:1px solid var(--line);border-radius:12px;margin:10px 0;background:white}.answer{display:none;background:#f0fdf4;padding:12px;border-radius:9px;margin-top:8px}.answer.show{display:block}
+.ai{position:fixed;right:20px;bottom:20px;width:330px;max-width:calc(100vw - 40px);background:#fff;border:1px solid var(--line);box-shadow:0 18px 45px rgba(0,0,0,.16);border-radius:18px;overflow:hidden;display:none}.ai.open{display:block}.aihead{background:#111827;color:white;padding:14px;font-weight:700}.messages{height:260px;overflow:auto;padding:12px}.msg{padding:9px 11px;border-radius:11px;margin:7px 0;max-width:90%;font-size:14px}.bot{background:#f2f4f7}.user{background:#eef2ff;margin-left:auto}.aiform{display:flex;border-top:1px solid var(--line)}.aiform input{flex:1;border:0;padding:12px;outline:0}.aiform button{background:var(--primary);color:#fff;padding:0 15px}
+.mobilebar{display:none}
+@media(max-width:900px){.sidebar{display:none}.main{margin:0;width:100%;padding:15px 15px 80px}.grid{grid-template-columns:repeat(2,1fr)}.subjects{grid-template-columns:1fr 1fr}.chapter-list{grid-template-columns:1fr}.mobilebar{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:20;justify-content:space-around;padding:8px}.mobilebar button{background:transparent;color:#475467}.hero h1{font-size:25px}}
+@media(max-width:520px){.subjects{grid-template-columns:1fr}.top{align-items:stretch}.search{width:100%}.grid{grid-template-columns:1fr 1fr}.hero{padding:21px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><span>📚</span> HSLC AI Coach</div>
+  <div class="nav">
+    <button class="active" data-view="home">🏠 Dashboard</button>
+    <button data-view="subjects">📚 All Subjects</button>
+    <button data-view="notes">📝 Notes</button>
+    <button data-view="questions">⭐ Important Questions</button>
+    <button data-view="tests">🎯 Tests & Mock Papers</button>
+    <button data-view="papers">📄 Previous Papers</button>
+    <button data-view="progress">📊 My Progress</button>
+    <button data-view="settings">⚙️ Pattern & Sources</button>
+  </div>
+  <div style="margin-top:30px;font-size:12px;color:#94a3b8">ASSEB Class 10 • 2026–27</div>
+</aside>
+
+<main class="main">
+<header class="top">
+  <input id="search" class="search" placeholder="Search subjects, chapters, topics or questions…">
+  <button class="lang" onclick="toggleLang()">EN / অসমীয়া</button>
+  <button class="btn primary" onclick="toggleAI()">🤖 Ask AI</button>
+</header>
+
+<section id="home" class="view active">
+  <div class="hero">
+    <h1>Your AI Study Coach for HSLC 🎓</h1>
+    <p>Learn every chapter • Revise smarter • Practise ASSEB-style questions • Track your progress</p>
+    <div class="chips"><span class="chip">📚 Complete syllabus structure</span><span class="chip">⭐ Evidence-based questions</span><span class="chip">📝 Notes & revision</span><span class="chip">🎯 Mock tests</span></div>
+  </div>
+  <div class="grid">
+    <div class="stat"><div class="muted">Chapters in catalogue</div><b id="chapterCount">0</b></div>
+    <div class="stat"><div class="muted">Practice questions</div><b>500+</b></div>
+    <div class="stat"><div class="muted">Mock formats</div><b>50 / 100</b></div>
+    <div class="stat"><div class="muted">Progress</div><b>0%</b></div>
+  </div>
+  <div class="section"><h2>Continue Learning</h2><div class="card"><b>Pick any subject to start.</b><p class="muted">Every chapter can contain notes, important topics, previous-paper links, quizzes and AI practice.</p><button class="btn primary" onclick="show('subjects')">Browse subjects →</button></div></div>
+  <div class="section"><h2>Today's Coach Plan</h2><div class="subjects">
+    <div class="card"><div class="icon">🧠</div><h3>Learn</h3><p>Read one chapter's exam notes.</p></div>
+    <div class="card"><div class="icon">⭐</div><h3>Practise</h3><p>Attempt 10 high-priority questions.</p></div>
+    <div class="card"><div class="icon">🎯</div><h3>Test</h3><p>Finish a short chapter quiz.</p></div>
+  </div></div>
+</section>
+
+<section id="subjects" class="view">
+  <h1>📚 All Subjects</h1><p class="muted">The catalogue is designed to hold the complete prescribed Class 10 ASSEB syllabus. Chapter names should be populated from the latest official syllabus/textbook before being marked verified.</p>
+  <div id="subjectGrid" class="subjects"></div>
+</section>
+
+<section id="notes" class="view">
+  <h1>📝 Notes & Important Topics</h1>
+  <div class="tabs" id="noteTabs"></div>
+  <div id="notesContent"></div>
+</section>
+
+<section id="questions" class="view">
+  <h1>⭐ Important Questions</h1>
+  <div class="card"><b>Question intelligence</b><p class="muted">Priority should be calculated from verified ASSEB papers, prescribed-textbook alignment, recurrence, and current syllabus—not from AI guesses alone.</p><div class="row"><button class="btn primary" onclick="generateQuestions()">Generate practice set</button><button class="btn" onclick="show('settings')">View verification rules</button></div></div>
+  <div id="questionList" style="margin-top:15px"></div>
+</section>
+
+<section id="tests" class="view">
+  <h1>🎯 Tests & Mock Papers</h1>
+  <div class="subjects">
+    <div class="card"><h3>Chapter Test</h3><p class="muted">10 questions • adaptive difficulty</p><button class="btn primary" onclick="startQuiz()">Start</button></div>
+    <div class="card"><h3>50-Mark Test</h3><p class="muted">Generated only after verified pattern data is selected.</p><button class="btn" onclick="show('settings')">Pattern check</button></div>
+    <div class="card"><h3>100-Mark Mock</h3><p class="muted">Full-paper simulator with section rules.</p><button class="btn" onclick="show('settings')">Pattern check</button></div>
+  </div>
+  <div id="quiz" class="card" style="margin-top:15px;display:none"></div>
+</section>
+
+<section id="papers" class="view">
+  <h1>📄 Previous Papers</h1>
+  <div class="card"><h3>Source-first paper library</h3><p class="muted">Add official HSLC PDFs and district half-yearly papers here. Each item should store year, subject, marks, source, and verification status.</p><div class="note"><b>Important:</b> Do not label a paper “official” unless its source has been verified.</div><button class="btn primary" onclick="show('settings')">Open source rules</button></div>
+</section>
+
+<section id="progress" class="view">
+  <h1>📊 My Progress</h1>
+  <div class="grid"><div class="stat"><div class="muted">Chapters studied</div><b>0</b></div><div class="stat"><div class="muted">Questions attempted</div><b>0</b></div><div class="stat"><div class="muted">Average</div><b>—</b></div><div class="stat"><div class="muted">Weak areas</div><b>—</b></div></div>
+  <div class="card"><h3>AI Coach</h3><p class="muted">After quizzes are connected to persistent storage, the coach can identify weak chapters and create a daily study plan.</p></div>
+</section>
+
+<section id="settings" class="view">
+  <h1>⚙️ Accuracy & ASSEB Pattern</h1>
+  <div class="card">
+    <h3>Verification hierarchy</h3>
+    <ol>
+      <li><b>Official ASSEB documents</b> — highest authority.</li>
+      <li><b>Recent actual HSLC papers</b> — analyze section structure, marks, choices and question types.</li>
+      <li><b>Prescribed textbooks/syllabus</b> — content boundary.</li>
+      <li><b>Reputable educational resources</b> — supporting signals only (e.g. PW, Next Toppers and similar resources).</li>
+      <li><b>AI-generated questions</b> — original practice, clearly labelled as AI-generated.</li>
+    </ol>
+    <div class="note"><b>Safety against hallucination:</b> The system must not invent an ASSEB pattern. If current official evidence is unavailable, it should say “pattern not verified” rather than present a generic board format as current.</div>
+    <div class="note"><b>Copyright-aware research:</b> External websites can be used to identify topics and trends, but the app should not copy their copyrighted question banks wholesale. Generate original practice questions and provide source attribution where appropriate.</div>
+  </div>
+</section>
+</main>
+</div>
+
+<div class="mobilebar"><button onclick="show('home')">🏠</button><button onclick="show('subjects')">📚</button><button onclick="show('questions')">⭐</button><button onclick="show('tests')">🎯</button><button onclick="toggleAI()">🤖</button></div>
+
+<div id="ai" class="ai">
+  <div class="aihead">🤖 AI Teacher <span style="float:right;cursor:pointer" onclick="toggleAI()">×</span></div>
+  <div id="messages" class="messages"><div class="msg bot">Hi! I can explain a Class 10 topic, create practice questions, or help you plan revision. Connect a real AI API in the backend for live answers.</div></div>
+  <form class="aiform" onsubmit="askAI(event)"><input id="aiInput" placeholder="Ask about a chapter…"><button>Send</button></form>
+</div>
+
+<script>
+const subjects=[
+ {id:'english',name:'English',icon:'📖',desc:'Literature, poetry, supplementary reader and grammar',count:'Complete prescribed chapters'},
+ {id:'maths',name:'Mathematics',icon:'➗',desc:'Algebra, geometry, trigonometry, statistics and more',count:'Complete prescribed chapters'},
+ {id:'science',name:'General Science',icon:'🔬',desc:'Physics, Chemistry and Biology',count:'Complete prescribed chapters'},
+ {id:'social',name:'Social Science',icon:'🌍',desc:'History, Geography, Political Science and Economics',count:'Complete prescribed chapters'},
+ {id:'assamese',name:'Assamese',icon:'📝',desc:'MIL lessons, poetry, grammar and writing',count:'Complete prescribed chapters'},
+ {id:'electives',name:'Electives',icon:'👗',desc:'Elective subjects including available vocational/design options',count:'Add each prescribed elective'},
+];
+const demoQuestions=[
+ {q:'Which concept from this chapter should you understand before attempting long-answer questions?',a:'Use the chapter notes and prescribed textbook first; the exact answer depends on the selected chapter.',tag:'Textbook-aligned'},
+ {q:'Create an ASSEB-style practice question from a high-priority topic.',a:'The production version should generate a new question only after the latest verified ASSEB pattern and syllabus are loaded.',tag:'AI-generated'},
+ {q:'How can previous-paper evidence be used?',a:'Analyze recurrence and question form without assuming that a repeated question will appear again verbatim.',tag:'Pattern analysis'}
+];
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>show(b.dataset.view));
+document.getElementById('subjectGrid').innerHTML=subjects.map(s=>`<div class="card subject"><div class="icon">${s.icon}</div><h3>${s.name}</h3><p>${s.desc}</p><span class="badge verified">Syllabus-ready structure</span><br><button class="open" onclick="openSubject('${s.id}')">Open subject →</button></div>`).join('');
+document.getElementById('chapterCount').textContent='All';
+
+function openSubject(id){
+ const s=subjects.find(x=>x.id===id); show('notes');
+ document.getElementById('noteTabs').innerHTML=`<button class="active">${s.icon} ${s.name}</button>`;
+ document.getElementById('notesContent').innerHTML=`<div class="card"><h2>${s.name} — Complete Chapter Hub</h2><p class="muted">Populate this list from the latest official ASSEB syllabus/textbook. Every verified chapter receives its own notes, important topics, questions, previous-paper links and test.</p><div class="chapter-list">${['Chapter 1','Chapter 2','Chapter 3','Chapter 4','Chapter 5','Chapter 6'].map((c,i)=>`<div class="chapter"><b>${c}</b><span class="badge">📝 Notes</span><span class="badge">⭐ Questions</span><span class="badge">🧠 Quiz</span><span class="badge">🎯 Test</span><div style="margin-top:9px"><button class="btn" onclick="chapterDemo('${s.name}','${c}')">Open AI classroom</button></div></div>`).join('')}</div></div>`;
+}
+function chapterDemo(sub,chap){
+ show('questions');
+ document.getElementById('questionList').innerHTML=`<div class="card"><h2>${sub} • ${chap}</h2><div class="note"><b>Important topics</b><br>1. Core definitions and concepts<br>2. Textbook examples<br>3. Diagram/formula/application areas where applicable<br>4. Previous-paper recurrence after verification</div>${demoQuestions.map((x,i)=>`<div class="question"><span class="badge ${i===1?'high':'verified'}">${x.tag}</span><b>Q${i+1}. ${x.q}</b><button class="btn" style="float:right" onclick="this.nextElementSibling.classList.toggle('show')">Answer</button><div class="answer">${x.a}</div></div>`).join('')}</div>`;
+}
+function generateQuestions(){chapterDemo('Class 10','Selected Chapter');}
+function toggleAI(){document.getElementById('ai').classList.toggle('open');if(document.getElementById('ai').classList.contains('open'))document.getElementById('aiInput').focus()}
+function askAI(e){e.preventDefault();const inp=document.getElementById('aiInput');const text=inp.value.trim();if(!text)return;const box=document.getElementById('messages');box.innerHTML+=`<div class="msg user">${escapeHtml(text)}</div><div class="msg bot">Demo mode: your question was received. Connect this frontend to an AI backend (with syllabus, verified ASSEB sources and a retrieval layer) to receive a live, source-grounded answer.</div>`;inp.value='';box.scrollTop=box.scrollHeight}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function startQuiz(){const q=document.getElementById('quiz');q.style.display='block';q.innerHTML='<h3>Quick Quiz</h3><p>What should have the highest priority when deciding the current ASSEB question pattern?</p><button class="btn" onclick="quizResult(false)">A. Random AI guess</button> <button class="btn" onclick="quizResult(true)">B. Verified official ASSEB evidence</button><div id="quizResult"></div>'}
+function quizResult(ok){document.getElementById('quizResult').innerHTML=`<div class="note">${ok?'✅ Correct — official evidence has the highest priority.':'❌ Recheck the verification hierarchy: official ASSEB evidence comes first.'}</div>`}
+function toggleLang(){alert('Assamese UI can be added as the next localization layer; the content database should store both English and Assamese fields.')}
+document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.subject').forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?'':'none')});
+</script>
+</body>
+</html>
